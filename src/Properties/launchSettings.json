@@ -2,7 +2,7 @@
   "profiles": {
     "Program": {
       "commandName": "Project",
-      "commandLineArgs": "\".\\images\\grid.jpg\" -x -b:2"
+      "commandLineArgs": "\".\\images\\grid.jpg\" --hemisphere --convex -b:2"
     }
   }
 }

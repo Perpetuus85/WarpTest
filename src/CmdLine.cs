@@ -3,7 +3,7 @@
 using System;
 using System.Drawing;
 
-record RemapOptions(string ImagePath, Size BorderSize, bool MapXAxis, bool Convex, bool ShowHelp);
+record RemapOptions(string ImagePath, Size BorderSize, bool MapXAxis, bool Convex, bool ShowHelp, bool HemisphereMap);
 
 static class CmdLine
 {
@@ -18,6 +18,7 @@ static class CmdLine
         bool mapX = false;
         bool convex = false;
         bool showHelp = false;
+        bool hemisphereMap = false;
 
         foreach (string arg in args)
         {
@@ -63,13 +64,17 @@ static class CmdLine
                     borderHeight = i;
                 }
             }
+            else if (arg.StartsWith("-h", StringComparison.OrdinalIgnoreCase) || arg.StartsWith("--hemisphere", StringComparison.OrdinalIgnoreCase))
+            {
+                hemisphereMap= true;
+            }
             else
             {
                 Console.WriteLine($"Unknown option \"{arg}\"");
             }
         }
 
-        return new(imgPath, new Size(borderWidth, borderHeight), mapX, convex, showHelp);
+        return new(imgPath, new Size(borderWidth, borderHeight), mapX, convex, showHelp, hemisphereMap);
     }
 
     public static bool ValidateOptions(RemapOptions options)
